@@ -1,0 +1,124 @@
+import 'package:flutter/material.dart';
+import 'dart:async'; // For the timer functionality
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Casewise',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const SplashScreen(), // Start with the SplashScreen
+    );
+  }
+}
+
+// Splash Screen
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    // Navigate to the WelcomeScreen after 3 seconds
+    Timer(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.lightBlue, // Light blue background
+      body: Center(
+        child: Text(
+          'Casewise',
+          style: TextStyle(
+            fontSize: 48,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// Welcome Screen
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+        title: const Text('Welcome to Casewise'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Get started with Casewise',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.deepPurple,
+              ),
+            ),
+            const SizedBox(height: 40),
+
+            // Sign Up Button
+            ElevatedButton(
+              onPressed: () {
+                // Navigate to the Sign Up Screen (placeholder for now)
+              },
+              child: const Text('Sign Up'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+            ),
+            const SizedBox(height: 20), // Spacer between buttons
+
+            // Google Sign-In Button
+            ElevatedButton.icon(
+              onPressed: () {
+                // Implement Google Sign-In logic here
+              },
+              icon: const Icon(Icons.g_mobiledata), // Google icon placeholder
+              label: const Text('Get started with Google'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white, // Google-style white button
+                foregroundColor: Colors.black, // Text and icon color for Google
+                side: const BorderSide(color: Colors.black), // Border color
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
